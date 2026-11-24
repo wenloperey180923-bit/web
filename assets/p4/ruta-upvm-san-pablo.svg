@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-labelledby="title description">
+  <title id="title">Ruta de referencia de la UPVM a Conjunto San Pablo</title>
+  <desc id="description">Esquema estático de ubicación en Tultitlán, desde la Universidad Politécnica del Valle de México hasta Conjunto San Pablo.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fcf9ff"/>
+      <stop offset="1" stop-color="#eee1fa"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#35134f" flood-opacity=".12"/>
+    </filter>
+  </defs>
+  <rect width="1000" height="560" rx="28" fill="url(#background)"/>
+  <g fill="none" stroke="#ded0eb" stroke-width="18" stroke-linecap="round">
+    <path d="M-50 150 280 250 470 210 720 315 1050 250"/>
+    <path d="M110 -30 180 140 350 330 420 590"/>
+    <path d="M560 -30 520 130 690 235 650 430 850 590"/>
+    <path d="M-30 440 210 380 390 450 650 420 1030 500"/>
+  </g>
+  <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round">
+    <path d="M-50 150 280 250 470 210 720 315 1050 250"/>
+    <path d="M110 -30 180 140 350 330 420 590"/>
+    <path d="M560 -30 520 130 690 235 650 430 850 590"/>
+    <path d="M-30 440 210 380 390 450 650 420 1030 500"/>
+  </g>
+  <g fill="#cbb5df">
+    <circle cx="318" cy="142" r="13"/><circle cx="770" cy="130" r="16"/>
+    <circle cx="825" cy="385" r="12"/><circle cx="290" cy="490" r="11"/>
+    <circle cx="92" cy="306" r="10"/><circle cx="920" cy="320" r="12"/>
+  </g>
+  <path d="M258 371 C320 338 340 286 407 275 S535 295 596 250 S687 223 756 174"
+        fill="none" stroke="#6f35a8" stroke-width="12" stroke-linecap="round" stroke-dasharray="1 1"/>
+  <path d="m748 162 25 8-8 24" fill="none" stroke="#6f35a8" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <g filter="url(#shadow)">
+    <rect x="48" y="46" width="370" height="76" rx="20" fill="#fff"/>
+    <rect x="570" y="432" width="382" height="76" rx="20" fill="#fff"/>
+  </g>
+  <circle cx="258" cy="371" r="24" fill="#6f35a8" stroke="#fff" stroke-width="8"/>
+  <circle cx="756" cy="174" r="24" fill="#35134f" stroke="#fff" stroke-width="8"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="74" y="78" fill="#6f35a8" font-size="13" font-weight="700" letter-spacing="2">PUNTO DE SALIDA</text>
+    <text x="74" y="103" fill="#35134f" font-size="19" font-weight="700">Universidad Politécnica del Valle de México</text>
+    <text x="595" y="464" fill="#6f35a8" font-size="13" font-weight="700" letter-spacing="2">DESTINO</text>
+    <text x="595" y="489" fill="#35134f" font-size="20" font-weight="700">Conjunto San Pablo · Tultitlán</text>
+    <text x="400" y="245" fill="#5c456c" font-size="15" font-weight="700" transform="rotate(13 400 245)">Av. Mexiquense</text>
+    <rect x="375" y="501" width="250" height="32" rx="16" fill="#e2d0f2"/>
+    <text x="500" y="522" fill="#56306f" font-size="13" font-weight="700" text-anchor="middle">ESQUEMA DE UBICACIÓN · NO A ESCALA</text>
+  </g>
+</svg>

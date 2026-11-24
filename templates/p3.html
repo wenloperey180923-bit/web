@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<p><a class="boton boton-verde" href="{{ url_for('practice3', action='crear') }}">Agregar producto</a></p>
+{% if products %}
+<div class="tabla-scroll"><table class="tabla">
+  <thead><tr><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Existencia</th><th>Acciones</th></tr></thead>
+  <tbody>{% for product in products %}
+  <tr><td>{{ product.nombre }}</td><td>{{ product.descripcion }}</td><td>${{ '%.2f'|format(product.precio) }}</td><td>{{ product.existencia }}</td>
+    <td class="acciones">
+      <a class="boton boton-chico" href="{{ url_for('practice3', action='editar', product_id=product.id) }}">Editar</a>
+      <form class="formulario-en-linea" method="post" action="{{ url_for('practice3', action='eliminar', product_id=product.id) }}"><button class="boton boton-chico boton-rojo">Eliminar</button></form>
+    </td></tr>{% endfor %}</tbody>
+</table></div>
+{% else %}<div class="aviso aviso-info">Todavía no hay productos registrados.</div>{% endif %}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1><p class="pequena">Sesiones con contraseñas protegidas y CRUD completo.</p>
+{% if current_user %}
+<div class="rejilla-tarjetas"><section class="tarjeta"><div class="encabezado">Bienvenida, {{ current_user }}</div><div class="cuerpo"><ul><li>Login y logout con contraseñas cifradas.</li><li>CRUD de estudiantes.</li><li>Sesiones.</li></ul></div><div class="pie"><a class="boton boton-verde" href="{{ url_for('practice5', action='crear') }}">Agregar estudiante</a> <a class="boton" href="{{ url_for('practice5', action='estudiantes') }}">Ver lista</a></div></section></div>
+{% else %}
+<p>Inicia sesión o crea una cuenta para gestionar estudiantes.</p><a class="boton" href="{{ url_for('practice5', action='login') }}">Iniciar sesión</a> <a class="boton boton-gris" href="{{ url_for('practice5', action='registro') }}">Crear cuenta</a>
+{% endif %}
+{% endblock %}

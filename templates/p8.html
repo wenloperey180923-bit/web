@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% set panel_page = panel %}
+{% block content %}
+{% if panel %}
+<div id="panel-metricas" data-metricas="{{ url_for('metrics') }}">
+  <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+    <div><h1>Panel de métricas</h1><p class="pequena">Se actualiza cada 5 segundos. <span id="estado"></span></p></div>
+    <a class="boton boton-gris" href="{{ url_for('practice8') }}">Volver</a>
+  </div>
+  <section class="kpis" id="kpis"></section>
+  {% for id, heading in [('tabla-recientes','Actividad reciente'),('tabla-paginas','Páginas'),('tabla-clics','¿Dónde hacen clic?'),('tabla-usuarios','Usuarios'),('tabla-carreras','Por carrera')] %}
+  <h2 class="h5 mt-4">{{ heading }}</h2><div class="tabla-scroll"><table id="{{ id }}" class="tabla"></table></div>
+  {% endfor %}
+  <p class="pequena mt-4">Los datos se guardan en la base de datos SQLite local. Navega por las prácticas para generar actividad.</p>
+</div>
+{% else %}
+<h1>Práctica 8 · Métricas del sitio</h1><p class="pequena">Analítica de uso hecha con Python, SQLite y JavaScript.</p>
+<div class="rejilla-tarjetas">
+  <section class="tarjeta"><div class="encabezado">Panel en vivo</div><div class="cuerpo"><p>Consulta visitantes, páginas, clics y tiempo de uso.</p></div><div class="pie"><a class="boton" href="{{ url_for('metrics_panel') }}">Abrir panel</a></div></section>
+  <section class="tarjeta"><div class="encabezado">Privacidad</div><div class="cuerpo"><p>El rastreo solo se activa si aceptas. No registra lo que escribes en formularios.</p></div><div class="pie"><a href="#" data-cambiar-privacidad>Cambiar mi preferencia</a></div></section>
+  <section class="tarjeta"><div class="encabezado">Explorar</div><div class="cuerpo"><p>Navega por el resto de prácticas para generar actividad.</p></div><div class="pie"><a class="boton boton-gris" href="{{ url_for('practice9') }}">Ir a la tienda</a></div></section>
+</div>
+{% endif %}
+{% endblock %}

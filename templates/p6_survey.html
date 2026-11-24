@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="contenedor-ancho"><section class="tarjeta"><div class="cuerpo">
+<h1>{{ title }}</h1><p class="pequena">Respuestas recibidas: {{ total }}</p>
+<form method="post">
+<div class="campo"><label for="nombre">1. Nombre completo</label><input id="nombre" name="nombre" required></div>
+{% for field, label, options in [
+  ('carrera','2. Carrera que estudias',['Sistemas','Industrial','Robótica','Civil','Industrial y Electrónica','Química']),
+  ('factor','3. ¿Qué factor valoras más de la UPVM?',['Profesores','Instalaciones y laboratorios','Biblioteca','Planta académica','Servicios administrativos']),
+  ('instalaciones','4. ¿Cómo calificarías las instalaciones?',['Excelente','Buena','Regular','Mala'])
+] %}
+<div class="campo"><label for="{{ field }}">{{ label }}</label><select id="{{ field }}" name="{{ field }}" required><option value="" selected disabled>Selecciona una opción</option>{% for option in options %}<option>{{ option }}</option>{% endfor %}</select></div>
+{% endfor %}
+<div class="campo"><label for="mejora">5. ¿Qué mejorarías en la UPVM?</label><textarea id="mejora" name="mejora" rows="3" required></textarea></div>
+<button class="boton boton-verde">Enviar respuestas</button>
+</form></div></section></div>
+{% endblock %}

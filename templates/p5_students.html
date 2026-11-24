@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<p><a class="boton boton-verde" href="{{ url_for('practice5', action='crear') }}">Agregar estudiante</a></p>
+{% if students %}
+<div class="tabla-scroll"><table class="tabla">
+<thead><tr><th>Matrícula</th><th>Nombre</th><th>Carrera</th><th>Correo</th><th>Promedio</th><th>Acciones</th></tr></thead>
+<tbody>{% for student in students %}<tr>
+<td>{{ student.matricula }}</td><td>{{ student.nombre }} {{ student.apellido }}</td><td>{{ student.carrera }}</td><td>{{ student.correo }}</td><td>{{ student.promedio }}</td>
+<td class="acciones"><a class="boton boton-chico" href="{{ url_for('practice5', action='editar', student_id=student.id) }}">Editar</a>
+<form class="formulario-en-linea" method="post" action="{{ url_for('practice5', action='eliminar', student_id=student.id) }}"><button class="boton boton-chico boton-rojo">Eliminar</button></form></td>
+</tr>{% endfor %}</tbody></table></div>
+{% else %}<div class="aviso aviso-info">Todavía no hay estudiantes registrados.</div>{% endif %}
+{% endblock %}

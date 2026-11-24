@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} · America</title>
+  <link rel="stylesheet" href="{{ asset('estilos.css') }}">
+  {% if map_page %}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="{{ asset('p4/estilos.css') }}">
+  {% endif %}
+  {% if shop_page %}<link rel="stylesheet" href="{{ asset('p9/estilos.css') }}">{% endif %}
+  {% if panel_page %}<link rel="stylesheet" href="{{ asset('p8/estilos.css') }}">{% endif %}
+</head>
+<body data-api="{{ asset('p4/api.json') }}" data-eventos="{{ url_for('track_event') }}">
+<nav class="barra">
+  <div class="barra-contenedor contenedor">
+    <a class="titulo" href="{{ url_for('home') }}">America · Prácticas</a>
+    <div class="barra-links">
+      <a href="{{ url_for('home') }}">Inicio</a>
+      <div class="menu-desplegable">
+        <a href="#" class="desplegable-boton">Prácticas ▾</a>
+        <div class="desplegable-contenido">
+          {% for label, endpoint in [('P3 · CRUD','practice3'),('P4 · Mapa','practice4'),('P5 · Estudiantes','practice5'),('P6 · Encuesta','practice6'),('P7 · Video','practice7'),('P8 · Métricas','practice8'),('P9 · Tienda','practice9')] %}
+          <a href="{{ url_for(endpoint) }}">{{ label }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% if current_user %}
+      <a href="{{ url_for('practice5') }}">{{ current_user }}</a>
+      <a href="{{ url_for('practice5', action='logout') }}">Salir</a>
+      {% else %}
+      <a href="{{ url_for('practice5', action='login') }}">Iniciar sesión</a>
+      {% endif %}
+    </div>
+    <div class="perfil-cabecera">
+      <div class="perfil-cabecera-texto">
+        <strong>Wendy America Lopez Reyes</strong>
+        <span>Conjunto San Pablo · Tultitlán, Edo. Méx.</span>
+      </div>
+      <img src="{{ asset('foto.jpg') }}" alt="Wendy America Lopez Reyes" class="avatar-cabecera">
+    </div>
+  </div>
+</nav>
+<main class="contenedor espacio">
+  {% for category, message in get_flashed_messages(with_categories=true) %}
+  <div class="aviso aviso-{{ category }}">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="pie">Wendy America Lopez Reyes · Aplicaciones Web Orientadas a Servicios · UPVM ·
+  <a href="#" data-cambiar-privacidad>Privacidad</a>
+</footer>
+{% if map_page %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script type="module" src="{{ asset('p4/main.js') }}"></script>
+{% endif %}
+{% if panel_page %}<script src="{{ asset('p8/panel.js') }}"></script>{% endif %}
+<script src="{{ asset('p8/tracker.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% set map_page = true %}
+{% block content %}
+<header id="presentacion" class="text-center mb-4">
+  <p class="inicio-etiqueta">PRÁCTICA 4 · SITIO PERSONAL</p>
+  <h1 id="nombre">Wendy America Lopez Reyes</h1>
+  <p id="ocupacion" class="ocupacion mb-1"></p>
+  <p class="ocupacion mb-0">Ubicación: Conjunto San Pablo, Tultitlán, Edo. Méx.</p>
+</header>
+<section id="como-llegar">
+  <h2>Etapa 1 · Cómo llegar a Conjunto San Pablo</h2>
+  <p>Trayecto de referencia desde la Universidad Politécnica del Valle de México. La imagen es fija y no interactiva.</p>
+  <div class="marco"><img class="mapa-estatico" src="{{ asset('p4/ruta-upvm-san-pablo.svg') }}" alt="Esquema de ruta desde la Universidad Politécnica del Valle de México hasta Conjunto San Pablo, Tultitlán"></div>
+</section>
+<section id="mapa-interactivo">
+  <h2>Etapa 3 · Mapa interactivo</h2>
+  <p>Mapa interactivo con Leaflet y OpenStreetMap.</p>
+  <div class="marco"><div id="mapa-leaflet"></div></div>
+</section>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+{% if show_video %}
+<div class="text-center mb-4"><h1>Incrustación de un video</h1><p class="pequena">Práctica 7 · Video con HTML5</p></div>
+<div class="contenedor-ancho"><section class="tarjeta"><div class="cuerpo">
+<div class="video-marco"><video class="video-practica" controls preload="metadata" poster="{{ asset('foto.jpg') }}"><source src="{{ asset('video/mi_video.mp4') }}" type="video/mp4"><source src="{{ asset('video/mi_video.webm') }}" type="video/webm">Tu navegador no soporta la reproducción de video.</video></div>
+<p class="pequena centrado mt-3">Video de presentación.</p>
+<div class="centrado"><a href="{{ url_for('practice7') }}" class="boton boton-gris">Volver</a></div>
+</div></section></div>
+{% else %}
+<div class="contenedor-ancho"><section class="tarjeta"><div class="cuerpo centrado">
+<h1>Incrustación de un video</h1><p>Presiona el botón para ver el video integrado en la página.</p>
+<a href="{{ url_for('practice7', action='video') }}" class="boton boton-verde">Ver mi video</a>
+</div></section></div>
+{% endif %}
+{% endblock %}

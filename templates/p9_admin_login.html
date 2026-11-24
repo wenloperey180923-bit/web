@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% set shop_page = true %}
+{% block content %}
+<div class="tienda-cuidado admin-tienda">
+  <div class="banner-tienda admin-banner"><span class="marca-cuidado">Cuidado<br>con el Perro</span><div><h1>Administración de Cuidado con el Perro</h1><p>Acceso para administrador.</p></div></div>
+  <div class="admin-login"><div class="admin-login-tarjeta">
+    <h2>Iniciar sesión como administrador</h2><p class="pequena">Credenciales de demostración: matrícula <code>777</code>, contraseña <code>admin</code>.</p>
+    <form method="post"><div class="campo"><label for="matricula">Matrícula</label><input id="matricula" name="matricula" required></div><div class="campo"><label for="contrasena">Contraseña</label><input id="contrasena" name="contrasena" type="password" required></div><button class="boton boton-admin">Entrar al panel</button></form>
+    <p class="centrado admin-login-volver"><a href="{{ url_for('practice9') }}">Volver a la tienda</a></p>
+  </div></div>
+</div>
+{% endblock %}

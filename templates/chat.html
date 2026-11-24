@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% set shop_page = true %}
+{% block content %}
+<div class="tienda-cuidado">
+  <div class="banner-tienda chat-banner"><span class="marca-cuidado">Cuidado<br>con el Perro</span><div><h1>Chat de la tienda</h1><p>Conversación entre usuarios · {{ current_user }}</p></div></div>
+  <div class="acciones-tienda"><a class="boton boton-gris" href="{{ url_for('practice9') }}">Volver a la tienda</a><a class="boton boton-gris" href="{{ url_for('practice5', action='logout') }}">Cerrar sesión</a></div>
+  <div class="chat-marco" id="chat" data-mensajes="{{ url_for('chat_messages') }}" data-enviar="{{ url_for('chat_send') }}" data-ultimo="{{ latest }}">
+    <div class="chat-mensajes" id="chat-mensajes" aria-live="polite">
+    {% if not messages %}<p class="chat-vacio" id="chat-vacio">Todavía no hay mensajes. ¡Escribe el primero!</p>{% endif %}
+    {% for message in messages %}<div class="chat-mensaje {% if message.es_mio %}mio{% endif %}" data-id="{{ message.id }}"><div class="chat-cabeza"><strong>{{ message.autor_nombre }}</strong><time>{{ message.hora }}</time></div><p>{{ message.mensaje }}</p></div>{% endfor %}
+    </div>
+    <form class="chat-form" id="chat-form" method="post" action="{{ url_for('chat_send') }}"><input type="hidden" name="token" value="{{ chat_token }}"><label class="visually-hidden" for="chat-texto">Mensaje</label><textarea id="chat-texto" name="mensaje" maxlength="500" rows="2" placeholder="Escribe un mensaje…" required></textarea><button class="boton boton-verde" id="chat-enviar">Enviar</button></form>
+    <p class="chat-estado" id="chat-estado"><span class="chat-punto"></span><span id="chat-estado-texto">Se actualiza cada 3 segundos.</span></p>
+  </div>
+</div>
+<script src="{{ asset('p9/chat.js') }}"></script>
+{% endblock %}

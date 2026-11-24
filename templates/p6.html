@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="contenedor-ancho"><section class="tarjeta"><div class="cuerpo centrado">
+<h1>Encuesta de satisfacción sobre la UPVM</h1>
+<p>Tu opinión nos ayuda a mejorar. La encuesta toma menos de 2 minutos.</p>
+<a href="{{ url_for('practice6', action='encuesta') }}" class="boton boton-verde">Iniciar encuesta</a>
+</div></section></div>
+{% endblock %}

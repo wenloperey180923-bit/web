@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% set shop_page = true %}
+{% set admin_view = admin_view|default(false) %}
+{% block content %}
+<div class="tienda-cuidado {% if admin_view %}admin-tienda{% endif %}">
+  <div class="banner-tienda {% if admin_view %}admin-banner{% endif %}">
+    <span class="marca-cuidado">Cuidado<br>con el Perro</span>
+    <div><h1>{% if admin_view %}Panel de administración{% else %}Cuidado con el Perro{% endif %}</h1><p>{% if admin_view %}Administración de inventario{% else %}Ropa, accesorios y novedades.{% endif %}</p></div>
+  </div>
+  {% if admin_view %}
+  <div class="admin-barra"><span class="admin-insignia">Admin</span><a class="boton boton-verde" href="{{ url_for('practice9', action='crear') }}">Agregar producto</a><a class="boton boton-gris" href="{{ url_for('practice9') }}">Ver tienda</a><a class="boton boton-chat" href="{{ url_for('practice9', action='chat') }}">Chat</a><a class="boton boton-gris" href="{{ url_for('metrics_panel') }}">Métricas</a><a class="boton boton-rojo" href="{{ url_for('shop_admin_logout') }}">Cerrar sesión admin</a></div>
+  {% endif %}
+  <div class="resumen-tienda {% if admin_view %}admin-resumen{% endif %}">
+    <div><strong>{{ stats.productos }}</strong><span>Productos</span></div><div><strong>{{ stats.piezas }}</strong><span>Piezas en tienda</span></div><div><strong>${{ '%.2f'|format(stats.valor or 0) }}</strong><span>Valor del inventario</span></div>
+    {% if admin_view %}<div><strong>{{ stats.bajos or 0 }}</strong><span>Con pocas piezas</span></div><div><strong>{{ stats.agotados or 0 }}</strong><span>Agotados</span></div><div><strong>{{ stats.promociones or 0 }}</strong><span>Con promoción</span></div>{% endif %}
+  </div>
+  <form class="filtros-tienda" method="get" action="{{ url_for('practice9', action='admin' if admin_view else '') }}">
+    <input type="search" name="q" value="{{ query }}" placeholder="Buscar producto, marca o código…">
+    <select name="categoria"><option value="">Todas las categorías</option>{% for option in categories %}<option value="{{ option }}" {% if option == category %}selected{% endif %}>{{ option }}</option>{% endfor %}</select>
+    <button class="boton">Filtrar</button><a class="boton boton-gris" href="{{ url_for('practice9', action='admin' if admin_view else '') }}">Limpiar</a>
+  </form>
+  {% if not admin_view %}
+  <div class="acciones-tienda">
+    <a class="boton boton-verde" href="{{ url_for('practice9', action='crear') }}">Agregar prenda</a><a class="boton boton-chat" href="{{ url_for('practice9', action='chat') }}">Chat de la tienda</a><a class="boton boton-admin" href="{{ url_for('practice9', action='admin') }}">Administración</a><a class="boton boton-gris" href="{{ url_for('metrics_panel') }}">Ver métricas</a>
+    <form method="post" action="{{ url_for('practice9', action='ejemplo') }}"><button class="boton boton-gris">Cargar catálogo de ejemplo</button></form>
+  </div>
+  {% endif %}
+  {% if products %}
+  <div class="tabla-scroll"><table class="tabla {% if admin_view %}admin-tabla{% endif %}">
+    <thead><tr>{% if admin_view %}<th>ID</th>{% endif %}<th>Código</th><th>Producto</th><th>Marca</th><th>Categoría</th><th>Precio</th><th>Existencia</th><th>Promoción</th><th>Acciones</th></tr></thead>
+    <tbody>{% for product in products %}{% set stock_class = 'agotado' if product.existencia == 0 else ('pocas' if product.existencia < 10 else 'disponible') %}
+    <tr>{% if admin_view %}<td>{{ product.id }}</td>{% endif %}<td><code>{{ product.codigo_barras }}</code></td><td>{{ product.nombre }}</td><td>{{ product.marca }}</td><td>{{ product.categoria }}</td><td class="precio-tienda">${{ '%.2f'|format(product.precio) }}</td><td>{{ product.existencia }} <span class="etiqueta-stock {{ stock_class }}">{{ 'Agotado' if product.existencia == 0 else ('Pocas piezas' if product.existencia < 10 else 'Disponible') }}</span></td><td>{% if product.promocion %}<span class="etiqueta-promo">{{ product.promocion }}</span>{% else %}<span class="texto-tenue">—</span>{% endif %}</td><td class="acciones"><a class="boton boton-chico" href="{{ url_for('practice9', action='editar', product_id=product.id) }}">Editar</a><form class="formulario-en-linea" method="post" action="{{ url_for('practice9', action='eliminar', product_id=product.id) }}"><button class="boton boton-chico boton-rojo">Eliminar</button></form></td></tr>
+    {% endfor %}</tbody>
+  </table></div>
+  {% else %}<div class="aviso aviso-info">No hay productos para mostrar. Puedes agregar uno o cargar el catálogo de ejemplo.</div>{% endif %}
+  {% if not admin_view %}
+  <section class="sucursales-tienda" id="sucursales">
+    <div class="sucursales-encabezado"><div><h2>Nuestras sucursales</h2><p class="pequena">Encuentra tu tienda Cuidado con el Perro más cercana.</p></div></div>
+    <ul class="lista-sucursales">{% for branch in branches %}<li><span class="sucursal-numero">{{ "%02d"|format(loop.index) }}</span><div><strong>{{ branch.nombre }}</strong><span>{{ branch.direccion }}</span><small>{{ branch.horario }}</small></div></li>{% endfor %}</ul>
+  </section>
+  <section class="video-tienda" id="video-tienda"><div class="video-tienda-encabezado"><div><h2>Video de la tienda</h2><p class="pequena">Conoce Cuidado con el Perro.</p></div></div><div class="video-marco"><video class="video-practica" controls preload="none" poster="{{ asset('foto.jpg') }}"><source src="{{ asset('p9/video-tienda.mp4') }}" type="video/mp4"></video></div></section>
+  {% endif %}
+</div>
+{% endblock %}

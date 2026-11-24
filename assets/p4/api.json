@@ -1,0 +1,14 @@
+{
+  "datosPersonales": {
+    "nombre": "Wendy America Lopez Reyes",
+    "ocupacion": "Estudiante",
+    "iniciales": "WA"
+  },
+  "ubicacion": {
+    "etiqueta": "Conjunto San Pablo, Tultitlán, Edo. Méx.",
+    "direccion": "Conjunto San Pablo, Tultitlán, Edo. Méx.",
+    "lat": 19.66556,
+    "lng": -99.09167,
+    "zoom": 15
+  }
+}
